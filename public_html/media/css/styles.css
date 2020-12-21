@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Bahnschrift;
+}
+
+body {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+main {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h2, h3, h4 {
+    margin: 10px;
+}
+
+main {
+    margin-bottom: 50px;
+}
+
+.title {
+    font-size: 50px;
+    margin: 50px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr, td, th {
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+/*######################
+##  Form
+########################*/
+
+form {
+    width: 400px;
+    margin: 20px 0;
+    background-color: orangered;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form p {
+    font-weight: bold;
+}
+
+label {
+    font-family: Arial;
+}
+
+input {
+    padding: 7px;
+    margin: 5px;
+}
+
+textarea {
+    padding: 20px;
+}
+
+button {
+    padding: 7px;
+    margin: 5px;
+    background: orangered;
+    color: white;
+    width: 150px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: white;
+    color: orangered;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: orangered;
+}
+
+.modal .close {
+    color: white;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    font-size: .8em;
+}
+
+/*######################
+##  Navigation
+########################*/
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    background-color: black;
+    width: 100vw;
+    padding: 20px;
+    font-size: 40px;
+}
+
+ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 0;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+a {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+a:hover {
+    color: black;
+}
+
+
+/*######################
+##  Index Page
+########################*/
+
+#review-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    align-content: center;
+    justify-items: center;
+    margin: 0 auto;
+}
+
+#review-grid-container .data-item {
+    display: flex;
+    width: 250px;
+    height: 450px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    padding: 15px;
+}
+
+#review-grid-container img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    transition: 0.5s ease-in-out;
+    margin: 15px;
+}
+
+#review-grid-container img:hover {
+    transform: scale(1.1);
+}
+
+.name {
+    font-size: 25px;
+    padding: 10px;
+}
+
