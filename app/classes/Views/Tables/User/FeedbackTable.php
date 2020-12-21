@@ -11,7 +11,7 @@ class FeedbackTable extends Table
         parent::__construct([
             'headers' => [
                 'ID',
-                'Status',
+                'Name',
                 'Feedback',
                 'Date'
             ],

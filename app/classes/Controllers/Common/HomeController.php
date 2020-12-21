@@ -43,7 +43,7 @@ class HomeController
 
         if ($user) {
 
-            $heading = "GOOD DAY, {$user['user_name']}!";
+            $heading = "GOOD DAY, {$user['name']}!";
             $links = [
                 'login' => (new Link([
                     'url' => App::$router::getUrl('logout'),

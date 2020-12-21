@@ -2,18 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Abstracts\Controller;
-use App\App;
 use App\Views\BasePage;
-use App\Views\Content\HomeContent;
-use App\Views\Forms\Admin\FeedbackForm;
 use Core\View;
-use Core\Views\Link;
 
-class HomeController extends Controller
+class HomeController
 {
-    protected BasePage $page;
-    protected $link;
+    protected $page;
 
     /**
      * Controller constructor.
@@ -35,62 +29,18 @@ class HomeController extends Controller
     }
 
     /**
-     * This method builds or sets
-     * current $page content
-     * renders it and returns HTML
-     *
-     * So if we have ex.: ServicesController,
-     * it can have methods responsible for
-     * index() (main page, usualy a list),
-     * view() (preview single),
-     * create() (form for creating),
-     * edit() (form for editing)
-     * delete()
-     *
-     * These methods can then be called on each page accordingly, ex.:
-     * add.php:
-     * $controller = new PixelsController();
-     * print $controller->add();
-     *
-     *
-     * my.php:
-     * $controller = new ServicesController();
-     * print $controller->my();
+     * Home Controller Index
      *
      * @return string|null
      * @throws \Exception
      */
-    function index(): ?string
+    public function index(): ?string
     {
-        if (App::$session->getUser()) {
-            $h3 = "Welcome back, {$_SESSION['email']}";
-        } else {
-            $h3 = 'Please log in';
-        }
+        $content = (new View([
+            'title' => 'Welcome to "MASKULINIS" gym',
+        ]))->render(ROOT . '/app/templates/content/index.tpl.php');
 
-        $home_content = new HomeContent();
-
-        $home_content->content();
-
-        $rows = App::$db->getRowsWhere('reviews'); //TODO: rows yra services, cia sudaryti
-
-        foreach ($rows as $id => &$row) {
-          if (App::$session->getUser()) {
-                    $feedbackForm = new FeedbackForm($row['name']);
-                    $row['feedback'] = $feedbackForm->render();
-                }
-        }
-
-        $content = new View([
-            'title' => 'WELCOME TO "MASKULINIS" GYM',
-            'heading' => $h3,
-            'buttons' => [
-                'login_or_create' => $home_content->redirectLink(),
-            ],
-            'services' => $rows
-        ]);
-
-        $this->page->setContent($content->render(ROOT . '/app/templates/content/index.tpl.php'));
+        $this->page->setContent($content);
 
         return $this->page->render();
     }
