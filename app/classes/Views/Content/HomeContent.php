@@ -3,7 +3,7 @@
 namespace App\Views\Content;
 
 use App\App;
-use App\Views\Forms\Admin\FeedbackForm;
+use App\Views\Forms\FeedbackForm;
 use Core\Views\Form;
 use Core\Views\Link;
 
@@ -36,7 +36,6 @@ class HomeContent
                 App::$db->insertRow('feedbacks', [
                     'email' => $_SESSION['email'],
                     'id' => $review_id,
-                    'status' => 'active',
                     'name' => $_POST['name'],
                     'timestamp' => time()
                 ]);

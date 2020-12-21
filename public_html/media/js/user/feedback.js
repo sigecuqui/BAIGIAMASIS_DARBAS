@@ -1,12 +1,17 @@
 'use strict';
 
 const endpoints = {
-    get: '/api/feedback/user/get'
+    get: '/api/feedback/get',
+    create: '/api/feedback/create',
 };
+
 /**
  * This defines how JS code selects elements by ID
  */
 const selectors = {
+    forms: {
+        create: 'feedback-create-form',
+    },
     table: 'table'
 }
 
@@ -40,6 +45,144 @@ function api(url, formData, success, fail) {
 }
 
 /**
+ * Form array
+ * Contains all form-related functionality
+ *
+ * Object forms
+ */
+const forms = {
+    /**
+     * Create Form
+     */
+    create: {
+        init: function () {
+            if (this.getElement()) {
+                this.getElement().addEventListener('submit', this.onSubmitListener);
+                return true;
+            }
+
+            return false;
+        },
+        getElement: function () {
+            return document.getElementById(selectors.forms.create);
+        }
+        ,
+        onSubmitListener: function (e) {
+            e.preventDefault();
+            let formData = new FormData(e.target);
+            formData.append('action', 'create');
+            api(endpoints.create, formData, forms.create.success, forms.create.fail);
+        }
+        ,
+        success: function (data) {
+            const element = forms.create.getElement();
+
+            table.row.append(data);
+            forms.ui.errors.hide(element);
+            forms.ui.clear(element);
+            forms.ui.flash.class(element, 'success');
+        }
+        ,
+        fail: function (errors) {
+            forms.ui.errors.show(forms.create.getElement(), errors);
+        }
+    },
+    /**
+     * Common/Universal Form UI Functions
+     */
+    ui: {
+        init: function () {
+            // Function has to exist
+            // since we're calling init() for
+            // all elements withing forms object
+            return true;
+        }
+        ,
+        /**
+         * Fills form fields with data
+         * Each data index corelates with input name attribute
+         *
+         * @param {Element} form
+         * @param {Object} data
+         */
+        fill: function (form, data) {
+            console.log('Filling form fields with:', data);
+            form.setAttribute('data-id', data.id);
+
+            Object.keys(data).forEach(data_id => {
+                if (form[data_id]) {
+                    const input = form.querySelector('input[name="' + data_id + '"]');
+                    if (input) {
+                        input.value = data[data_id];
+                    } else {
+                        console.log('Could not fill field ' + data_id + 'because it wasn`t found in form');
+                    }
+                }
+            });
+        }
+        ,
+        clear: function (form) {
+            let fields = form.querySelectorAll('[name]')
+            fields.forEach(field => {
+                field.value = '';
+            });
+        }
+        ,
+        flash:
+            function (element, class_name) {
+                const prev = element.className;
+
+                element.className += class_name;
+                setTimeout(function () {
+                    element.className = prev;
+                }, 1000);
+            },
+        /**
+         * Form-error related functionality
+         */
+        errors: {
+            /**
+             * Shows errors in form
+             * Each error index correlates with input name attribute
+             *
+             * @param {Element} form
+             * @param {Object} errors
+             */
+            show: function (form, errors) {
+                this.hide(form);
+
+                console.log('Form errors received', errors);
+
+                Object.keys(errors).forEach(function (error_id) {
+                    const field = form.querySelector('textarea[name="' + error_id + '"]');
+                    if (field) {
+                        const span = document.createElement("span");
+                        span.className = 'field-error';
+                        span.innerHTML = errors[error_id];
+                        field.parentNode.append(span);
+
+                        console.log('Form error in field: ' + error_id + ':' + errors[error_id]);
+                    }
+                });
+            }
+            ,
+            /**
+             * Hides (destroys) all errors in form
+             * @param {type} form
+             */
+            hide: function (form) {
+                const errors = form.querySelectorAll('.field-error');
+                if (errors) {
+                    errors.forEach(node => {
+                        node.remove();
+                    });
+                }
+            }
+        }
+    }
+};
+
+/**
  * Table-related functionality
  */
 const table = {
@@ -49,6 +192,11 @@ const table = {
     init: function () {
         if (this.getElement()) {
             this.data.load();
+
+            Object.keys(this.buttons).forEach(buttonId => {
+                let success = table.buttons[buttonId].init();
+                console.log('Setting up button listeners "' + buttonId + '": ' + (success ? 'PASS' : 'FAIL'));
+            });
 
             return true;
         }
@@ -64,7 +212,7 @@ const table = {
          * @returns {undefined}
          */
         load: function () {
-            console.log('Table: Calling API to get data...');
+            console.log('table: Calling API to get data...');
             api(endpoints.get, null, this.success, this.fail);
         },
         success: function (data) {
@@ -77,16 +225,17 @@ const table = {
         }
     },
     /**
-     * Operations with rows
+     * Operations with items
      */
     row: {
         /**
-         * Builds row element from data
+         * Builds item element from data
          *
          * @param {Object} data
          * @returns {Element}
          */
         build: function (data) {
+
             const row = document.createElement('tr');
 
             if (data.id == null) {
@@ -97,36 +246,61 @@ const table = {
             row.className = 'data-row';
 
             Object.keys(data).forEach(data_id => {
-                let td = document.createElement('td');
-                td.innerHTML = data[data_id];
-                td.className = data_id;
-                row.append(td);
+                switch (data_id) {
+
+                    case 'buttons':
+                        let buttons = data[data_id];
+                        Object.keys(buttons).forEach(button_id => {
+                            let td = document.createElement('td');
+                            let btn = document.createElement('button');
+                            btn.innerHTML = buttons[button_id];
+                            btn.className = button_id;
+                            td.append(btn);
+                            row.append(td);
+                        });
+                        break;
+
+                    default:
+                        let td = document.createElement('td');
+                        td.innerHTML = data[data_id];
+                        td.className = data_id;
+                        row.append(td);
+                }
             });
 
             return row;
         },
         /**
-         * Appends row to table from data
+         * Appends item to table from data
          *
          * @param {Object} data
          */
         append: function (data) {
-            console.log('Table: Creating row in table from ', data);
+            console.log('table: Creating row in table container from ', data);
             table.getElement().append(this.build(data));
-        }
+        },
+    },
+    // Buttons are declared on whole table, not on each item individually, so
+    // onClickListeners dont duplicate
+    buttons: {
+
     }
 };
-
 
 /**
  * Core page functionality
  */
 const app = {
     init: function () {
+        // Initialize all forms
+        Object.keys(forms).forEach(formId => {
+            let success = forms[formId].init();
+            console.log('Initializing form "' + formId + '": ' + (success ? 'SUCCESS' : 'FAIL'));
+        });
 
         console.log('Initializing table...');
         let success = table.init();
-        console.log('Table: Initialization: ' + (success ? 'PASS' : 'FAIL'));
+        console.log('table: Initialization: ' + (success ? 'PASS' : 'FAIL'));
     }
 };
 

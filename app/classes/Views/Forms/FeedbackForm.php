@@ -1,40 +1,31 @@
 <?php
 
 
-namespace App\Views\Forms\Admin;
+namespace App\Views\Forms;
 
 
 use Core\Views\Form;
 
 class FeedbackForm extends Form
 {
-    public function __construct($value = null)
-    {
+    public function __construct() {
         parent::__construct([
-            'attr' => [
-                'method' => 'POST'
-            ],
             'fields' => [
-                'id' => [
-                    'type' => 'hidden',
-                    'value' => 'FEEDBACK'
-                ],
-                'name' => [
-                    'type' => 'hidden',
-                    'value' => $value
-                ],
-            ],
-            'buttons' => [
-                'submit' => [
-                    'title' => 'Write a feedback',
-                    'type' => 'submit',
+                'comment' => [
+                    'label' => 'Make a feedback',
+                    'type' => 'textarea',
+                    'validators' => [
+                        'validate_field_not_empty'
+                        //TODO ● komentaras negali viršyti 500 simbolių
+                    ],
                     'extra' => [
                         'attr' => [
-                            'class' => 'btn'
-                        ]
-                    ]
+                            'placeholder' => 'Enter your feedback about our gym',
+                        ],
+                    ],
                 ],
-            ]
+            ],
+            // No buttons since they will be defined in Extends
         ]);
     }
 }

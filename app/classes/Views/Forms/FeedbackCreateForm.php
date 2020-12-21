@@ -4,12 +4,13 @@
 namespace App\Views\Forms;
 
 
-class FeedbackCreateForm extends FeedbackBaseForm
+class FeedbackCreateForm extends FeedbackForm
 {
     public function __construct() {
         parent::__construct();
 
-        $this->data['buttons']['feedback'] = [
+        $this->data['attr']['id'] = 'feedback-create-form';
+        $this->data['buttons']['create'] = [
             'title' => 'Feedback',
         ];
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Common;
+namespace App\Controllers\Common\Auth;
 
 use App\App;
 use Core\FileDB;

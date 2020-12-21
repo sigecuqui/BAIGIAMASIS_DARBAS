@@ -13,7 +13,7 @@ class FeedbackTable extends Table
                 'ID',
                 'Status',
                 'Feedback',
-                'Time Ago'
+                'Date'
             ],
             'rows' => $feedbacks
         ]);
