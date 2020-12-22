@@ -48,7 +48,7 @@ class FeedbackApiController
             $user = App::$db->getRowById('users', $row['user_id']);
 
             $row = [
-                'id' => $id,
+                'id' => $row['user_id'],
                 'name' => $user['name'],
                 'comment' => $row['comment'],
                 'timestamp' => $this->timeFormat($row)
