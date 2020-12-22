@@ -37,19 +37,19 @@ class FeedbackApiController
     }
 
     /**
-     * Formats rows from given @param (in this case - orders data)
+     * Formats rows from given @param (in this case - feedback data)
      * Intended use is for setting data in json.
      *
-     * @param $feedbacks
      * @return mixed
      */
     private function buildRows($feedbacks)
     {
         foreach ($feedbacks as $id => &$row) {
+            $user = App::$db->getRowById('users', $row['user_id']);
 
             $row = [
                 'id' => $id,
-                'name' => $row['name'],
+                'name' => $user['name'],
                 'comment' => $row['comment'],
                 'timestamp' => $this->timeFormat($row)
             ];

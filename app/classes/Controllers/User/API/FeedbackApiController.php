@@ -19,15 +19,23 @@ class FeedbackApiController extends AuthController
         $form = new FeedbackCreateForm();
 
         if ($form->validate()) {
-            $user = App::$session->getUser();
+            $users = App::$db->getRowsWhere('users');
+            $logged_user = App::$session->getUser();
+
+            foreach ($users as $id => $user) {
+                if ($logged_user['email'] === $user['email']) {
+                    $user_id = $id;
+                }
+            }
 
             $feedback = $form->values();
+
             $feedback['id'] = App::$db->insertRow('feedback', $form->values() + [
-                    'name' => $user['name'],
+                    'user_id' => $user_id,
                     'timestamp' => time()
                 ]);
 
-            $feedback = $this->buildRow($user, $feedback);
+            $feedback = $this->buildRow($logged_user, $feedback);
             $response->setData($feedback);
         } else {
             $response->setErrors($form->getErrors());
@@ -64,6 +72,8 @@ class FeedbackApiController extends AuthController
      */
     private function timeFormat($time)
     {
+        date_default_timezone_set('Europe/Vilnius');
+
         return date('Y-m-d H:i:s', $time);
     }
 }

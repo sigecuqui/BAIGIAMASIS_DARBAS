@@ -16,18 +16,21 @@ class Navigation extends View
     public function generate()
     {
         $nav = [
-                App::$router::getUrl('index') => 'Home',
-                App::$router::getUrl('feedback') => 'Feedback',
-            ];
+            /** Left navigation */
+            App::$router::getUrl('index') => 'Home',
+            App::$router::getUrl('feedback') => 'Feedback',
+        ];
 
         if (App::$session->getUser()) {
             return $nav + [
-                        App::$router::getUrl('logout') => 'Logout'
+                    /** Right navigation */
+                    App::$router::getUrl('logout') => 'Logout'
                 ];
         } else {
             return $nav + [
-                        App::$router::getUrl('register') => 'Register',
-                        App::$router::getUrl('login') => 'Login'
+                    /** Right navigation */
+                    App::$router::getUrl('register') => 'Register',
+                    App::$router::getUrl('login') => 'Login'
                 ];
         }
     }
