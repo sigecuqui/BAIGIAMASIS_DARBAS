@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Views\BasePage;
+use App\Views\Forms\ServicesForm;
 use Core\View;
 
 class HomeController
@@ -24,7 +25,8 @@ class HomeController
     public function __construct()
     {
         $this->page = new BasePage([
-            'title' => 'GYM'
+            'title' => 'GYM',
+            'js' => ['/media/js/home.js']
         ]);
     }
 
@@ -36,8 +38,11 @@ class HomeController
      */
     public function index(): ?string
     {
+        $services = new ServicesForm();
+
         $content = (new View([
             'title' => 'Welcome to "MASKULINIS" gym',
+            'services' => $services,
         ]))->render(ROOT . '/app/templates/content/index.tpl.php');
 
         $this->page->setContent($content);

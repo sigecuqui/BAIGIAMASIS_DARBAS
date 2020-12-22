@@ -10,7 +10,7 @@
 <?php endif; ?>
 
 <?php if ($data['message']): ?>
-    <p><?php print $data['message']; ?></p>
+    <h4><?php print $data['message']; ?></h4>
 <?php endif; ?>
 
 <?php foreach ($data['links'] as $link): ?>

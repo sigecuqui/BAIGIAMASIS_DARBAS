@@ -15,18 +15,24 @@ class Navigation extends View
 
     public function generate()
     {
-        $nav = [App::$router::getUrl('index') => 'Home'];
+        $nav = [
+            'left' => [
+                App::$router::getUrl('index') => 'Home',
+                App::$router::getUrl('feedback') => 'Feedback',
+            ]];
 
         if (App::$session->getUser()) {
-                return $nav + [
-                        App::$router::getUrl('feedback') => 'Feedback',
-                        App::$router::getUrl('logout') => 'Logout',
-                    ];
+            return $nav + [
+                    'right' => [
+                        App::$router::getUrl('logout') => 'Logout'
+                    ]
+                ];
         } else {
             return $nav + [
-                    App::$router::getUrl('feedback') => 'Feedback',
-                    App::$router::getUrl('register') => 'Register',
-                    App::$router::getUrl('login') => 'Login',
+                    'right' => [
+                        App::$router::getUrl('register') => 'Register',
+                        App::$router::getUrl('login') => 'Login'
+                    ]
                 ];
         }
     }
@@ -36,5 +42,4 @@ class Navigation extends View
         return parent::render($template_path);
     }
 }
-
 

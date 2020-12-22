@@ -2,7 +2,7 @@
 <?php print $data['form']; ?>
 <?php if (isset ($data['message'])): ?>
 
-    <p><?php print $data['message']; ?></p>
+    <h4><?php print $data['message']; ?></h4>
 
 <?php endif; ?>
 

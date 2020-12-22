@@ -4,7 +4,9 @@
 namespace App\Views\Forms;
 
 
-class ServicesForm
+use Core\Views\Form;
+
+class ServicesForm extends Form
 {
     public function __construct()
     {

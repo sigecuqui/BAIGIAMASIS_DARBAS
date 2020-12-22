@@ -8,15 +8,15 @@ use Core\Views\Form;
 
 class FeedbackForm extends Form
 {
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct([
             'fields' => [
                 'comment' => [
                     'label' => 'Make a feedback',
                     'type' => 'textarea',
                     'validators' => [
-                        'validate_field_not_empty'
-                        //TODO ● komentaras negali viršyti 500 simbolių
+                        'validate_field_not_empty',
                     ],
                     'extra' => [
                         'attr' => [

@@ -7,6 +7,9 @@
 
 body {
     background-color: white;
+    background-image: url("https://cdn.pixabay.com/photo/2013/07/12/13/18/bodybuilder-146791_960_720.png");
+    background-position: center;
+    background-repeat: repeat-x;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,8 +17,17 @@ body {
     text-align: center;
 }
 
+header {
+    height: 70px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 main {
-    padding-top: 50px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,10 +36,6 @@ main {
 
 h1, h2, h3, h4 {
     margin: 10px;
-}
-
-main {
-    margin-bottom: 50px;
 }
 
 .title {
@@ -52,6 +60,18 @@ main {
     transform: scale(1.3);
 }
 
+.heading, a, h4 {
+    color: white;
+    text-shadow: 2px 2px 0 black,
+    2px -2px 0 black,
+    -2px 2px 0 black,
+    -2px -2px 0 black,
+    2px 0 0 black,
+    0 2px 0 black,
+    -2px 0 0 black,
+    0 -2px 0 black;
+}
+
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -61,6 +81,11 @@ tr, td, th {
     margin: 10px;
     padding: 10px;
     text-align: center;
+}
+
+.table {
+    width: 500px;
+    background: white;
 }
 
 
@@ -133,26 +158,21 @@ button:hover {
 
 nav {
     display: flex;
-    justify-content: flex-end;
-    background-color: black;
-    width: 100vw;
-    padding: 20px;
     font-size: 40px;
+    max-width: 380px;
 }
 
 ul {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     list-style: none;
     padding: 0;
-    align-items: center;
-    width: 90%;
     margin: 0 auto;
 }
 
 a {
     padding: 10px;
-    color: white;
     text-decoration: none;
     font-size: 25px;
     cursor: pointer;
@@ -163,12 +183,37 @@ a:hover {
     color: red;
 }
 
+/*######################
+##  Footer
+########################*/
+
+footer{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin-top: 50px;
+}
 
 /*######################
 ##  Index Page
 ########################*/
 
-#review-grid-container {
+.represent-image{
+    height: 150px;
+    width: 100%;
+    background-image: url('../image/empty-gym.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#services-grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
@@ -177,7 +222,7 @@ a:hover {
     margin: 0 auto;
 }
 
-#review-grid-container .data-item {
+#services-grid-container .data-item {
     display: flex;
     width: 250px;
     height: 450px;
@@ -188,7 +233,7 @@ a:hover {
     padding: 15px;
 }
 
-#review-grid-container img {
+#services-grid-container img {
     width: 250px;
     height: 250px;
     object-fit: contain;
@@ -196,12 +241,29 @@ a:hover {
     margin: 15px;
 }
 
-#review-grid-container img:hover {
+#services-grid-container img:hover {
     transform: scale(1.1);
 }
 
 .name {
     font-size: 25px;
     padding: 10px;
+}
+
+@media only screen and (min-width: 400px) {
+    /* For desktop: */
+
+    nav {
+        max-width: 800px;
+    }
+
+    ul {
+        justify-content: space-between;
+    }
+
+    .represent-image {
+        height: 300px;
+    }
+
 }
 

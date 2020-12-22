@@ -2,7 +2,7 @@
     <?php foreach ($data['fields'] as $field_id => $field): ?>
         <?php if (isset($field['label'])): ?>
             <label>
-            <p><?php print $field['label']; ?></p>
+            <h4><?php print $field['label']; ?></h4>
 
         <?php endif; ?>
         <?php if ($field['type'] === 'select'): ?>

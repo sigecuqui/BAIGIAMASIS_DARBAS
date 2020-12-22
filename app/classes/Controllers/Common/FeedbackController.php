@@ -38,7 +38,7 @@ class FeedbackController
                 ]))->render()
             ];
         } else {
-            $msg = 'Want to write a comment?';
+            $message = 'Want to write a feedback?';
             $links = [
                 'register' => (new Link([
                     'url' => App::$router::getUrl('register'),
@@ -50,10 +50,10 @@ class FeedbackController
         $table = new FeedbackTable();
 
         $content = (new View([
-            'title' => 'Feedbacks:',
+            'title' => 'Feedbacks',
             'table' => $table->render(),
             'forms' => $forms ?? [],
-            'message' => $msg ?? [],
+            'message' => $message ?? [],
             'links' => $links ?? []
         ]))->render(ROOT . '/app/templates/content/feedback.tpl.php');
 

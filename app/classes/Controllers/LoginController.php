@@ -38,7 +38,7 @@ class LoginController extends GuestController
             App::$session->login($clean_inputs['email'], $clean_inputs['password']);
 
             if (App::$session->getUser()) {
-                header("Location: index");
+                header('Location: index');
                 exit();
             }
         }
