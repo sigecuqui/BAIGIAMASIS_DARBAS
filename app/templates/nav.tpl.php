@@ -1,24 +1,16 @@
 <header>
     <nav>
-        <ul class="nav_left">
-            <?php foreach ($data as $title => $link): ?>
+        <?php foreach ($data as $ul): ?>
 
-                <?php if ($link == 'Home' || $link == 'Feedback'): ?>
-                    <li><a href="<?php print $title; ?>"><?php print $link; ?></a></li>
-                <?php endif; ?>
+            <ul>
+                <?php foreach ($ul as $link => $title): ?>
 
-            <?php endforeach; ?>
-        </ul>
-        <ul class="nav_right">
-            <?php foreach ($data as $title => $link): ?>
+                    <li><a href="<?php print $link; ?>" class="<?php $_SERVER['REQUEST_URI'] == $link ?
+                            print 'active' : ''; ?>"><?php print $title; ?></a></li>
 
-                <?php if ($link == 'Logout' || $link == 'Register' || $link == 'Login'): ?>
+                <?php endforeach; ?>
+            </ul>
 
-                        <li><a href="<?php print $title; ?>"><?php print $link; ?></a></li>
-
-                <?php endif; ?>
-
-            <?php endforeach; ?>
-        </ul>
+        <?php endforeach; ?>
     </nav>
 </header>

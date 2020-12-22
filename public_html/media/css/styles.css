@@ -164,8 +164,8 @@ a:hover {
     color: red;
 }
 
-.red {
-    color: red;
+.active {
+    border: 2px solid red;
 }
 /*######################
 ##  Footer
@@ -267,7 +267,10 @@ iframe{
 
     .container {
         flex-wrap: wrap;
-        /*height: 400px;*/
+    }
+
+    .container-service {
+        height: 300px;
     }
 
     .nav_left {
@@ -316,6 +319,7 @@ iframe{
 
     .container-service {
         width: calc(800px / 4);
+        height: 350px;
     }
 
     .container-service:hover {
