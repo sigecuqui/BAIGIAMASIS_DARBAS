@@ -53,6 +53,9 @@ h1, h2, h3, h4 {
     red 0 0 75px;
     transition: 0.5s;
     padding: 5px;
+    animation-name: lights;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
 }
 
 .title:hover {
@@ -336,3 +339,13 @@ iframe{
     }
 }
 
+/* Animations */
+
+@keyframes lights {
+    15% {color: orangered;}
+    30% {color: red;}
+    45% {color: darkred;}
+    60% {color: red;}
+    75% {color: orangered;}
+    90% {color: pink;}
+}
