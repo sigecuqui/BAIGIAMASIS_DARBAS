@@ -32,7 +32,7 @@ class FeedbackApiController extends AuthController
 
             $feedback['id'] = App::$db->insertRow('feedback', $form->values() + [
                     'user_id' => $user_id,
-                    'timestamp' => time()
+                    'timestamp' =>$this->timeFormat(time())
                 ]);
 
             $feedback = $this->buildRow($logged_user, $feedback);

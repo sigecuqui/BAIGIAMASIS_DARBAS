@@ -25,16 +25,6 @@ class FeedbackApiController
         return $response->toJson();
     }
 
-    /**
-     * Returns formatted time from timestamp given in row.
-     *
-     * @param $row
-     * @return string
-     */
-    private function timeFormat($row)
-    {
-        return date('Y-m-d H:i:s', $row['timestamp']);
-    }
 
     /**
      * Formats rows from given @param (in this case - feedback data)
@@ -48,10 +38,10 @@ class FeedbackApiController
             $user = App::$db->getRowById('users', $row['user_id']);
 
             $row = [
-                'id' => $row['user_id'],
+                'id' => $id,
                 'name' => $user['name'],
                 'comment' => $row['comment'],
-                'timestamp' => $this->timeFormat($row)
+                'timestamp' => $row['timestamp']
             ];
         }
 
