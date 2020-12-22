@@ -2,10 +2,8 @@
 
 namespace App\Controllers\Common;
 
-use App\App;
 use App\Views\BasePage;
 use Core\View;
-use Core\Views\Link;
 
 class HomeController
 {
@@ -26,8 +24,7 @@ class HomeController
     public function __construct()
     {
         $this->page = new BasePage([
-            'title' => 'MASKULINIS',
-            'js' => ['/media/js/home.js']
+            'title' => 'GYM'
         ]);
     }
 
@@ -39,32 +36,23 @@ class HomeController
      */
     public function index(): ?string
     {
-        $user = App::$session->getUser();
-
-        if ($user) {
-
-            $heading = "GOOD DAY, {$user['name']}!";
-            $links = [
-                'login' => (new Link([
-                    'url' => App::$router::getUrl('logout'),
-                    'text' => 'Logout'
-                ]))->render()
-            ];
-        } else {
-            $heading = 'PLEASE LOG IN';
-            $links = [
-                'login' => (new Link([
-                    'url' => App::$router::getUrl('login'),
-                    'text' => 'Login'
-                ]))->render()
-            ];
-        }
-
         $content = (new View([
-            'title' => 'WELCOME TO "MASKULINIS" GYM',
-            'heading' => $heading,
-            'forms' => $forms ?? [],
-            'links' => $links ?? []
+            'title' => 'Welcome to "MASKULINIS" gym',
+
+            'services' => [
+                'Individual training' => [
+                    'description' => 'Individual training with a personal certificated coach',
+                    'img' => 'individual'
+                ],
+                'Group training' => [
+                    'description' => 'Group activities: fitness, muscle building, cross-fit, etc.',
+                    'img' => 'group'
+                ],
+                'Training consultations' => [
+                    'description' => 'All information you need about health, sport and much more!',
+                    'img' => 'consult'
+                ]
+            ],
         ]))->render(ROOT . '/app/templates/content/index.tpl.php');
 
         $this->page->setContent($content);

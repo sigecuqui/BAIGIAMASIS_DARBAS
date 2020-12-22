@@ -42,7 +42,7 @@ h1, h2, h3, h4 {
     font-size: 50px;
     margin: 50px;
     color: #FFFFFF;
-    background: #333333;
+    background: rgba(0, 0, 0, 0.7);
     text-shadow: #FFF 0 0 5px,
     #FFF 0 0 10px,
     #FFF 0 0 15px,
@@ -52,7 +52,6 @@ h1, h2, h3, h4 {
     red 0 0 50px,
     red 0 0 75px;
     transition: 0.5s;
-    border-radius: 15px;
     padding: 5px;
 }
 
@@ -60,7 +59,7 @@ h1, h2, h3, h4 {
     transform: scale(1.3);
 }
 
-.heading, a, h4 {
+.heading, a, h4, .service-title {
     color: white;
     text-shadow: 2px 2px 0 black,
     2px -2px 0 black,
@@ -160,6 +159,7 @@ nav {
     display: flex;
     font-size: 40px;
     max-width: 380px;
+    cursor: pointer;
 }
 
 ul {
@@ -169,6 +169,7 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 a {
@@ -194,7 +195,6 @@ footer{
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.7);
-    margin-top: 50px;
 }
 
 /*######################
@@ -224,9 +224,15 @@ footer{
 }
 
 .container-service {
-    border: 1px solid lightgrey;
+    border: 1px solid black;
     width: calc(800px / 4);
+    background-color: rgba(250, 250, 250, 0.7);
 }
+
+.container-service:hover {
+    transform: scale(1.3);
+}
+
 .service-description-container{
     padding: 0 5px 5px 5px;
 }
@@ -238,6 +244,26 @@ footer{
 .service-image{
     height: 40%;
     width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: grayscale(80%);
+}
+
+.service-image:hover {
+    filter: grayscale(0%);
+}
+
+.individual {
+    background-image: url("../image/individual.jpg");
+}
+
+.group {
+    background-image: url("../image/girls.png");
+}
+
+.consult {
+    background-image: url("../image/consult.png");
 }
 
 .map{

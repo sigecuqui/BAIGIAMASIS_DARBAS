@@ -5,7 +5,6 @@ namespace App\Controllers\Common;
 use App\App;
 use App\Views\BasePage;
 use App\Views\Forms\FeedbackCreateForm;
-use App\Views\Forms\ServicesForm;
 use App\Views\Tables\User\FeedbackTable;
 use Core\View;
 use Core\Views\Link;
@@ -50,7 +49,7 @@ class FeedbackController
         $table = new FeedbackTable();
 
         $content = (new View([
-            'title' => 'Feedbacks',
+            'title' => 'Feedback',
             'table' => $table->render(),
             'forms' => $forms ?? [],
             'message' => $message ?? [],

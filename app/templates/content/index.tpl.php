@@ -1,5 +1,4 @@
 <div class="represent-image">
-    <h2 class="heading"><?php print $data['heading'] ?></h2>
     <h1 class="title"><?php print $data['title'] ?></h1>
 </div>
 
@@ -8,7 +7,7 @@
     <?php foreach ($data['services'] as $service_title => $service): ?>
 
         <article class="container-service">
-            <div class="service-image" <?php print $service['img']; ?>></div>
+            <div class="service-image <?php print $service['img']; ?>"></div>
             <div class="service-description-container">
                 <h3 class="service-title"><?php print $service_title; ?></h3>
                 <p><?php print $service['description']; ?></p>
