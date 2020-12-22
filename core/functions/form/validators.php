@@ -160,3 +160,30 @@ function validate_url(string $field_value, array &$field): bool
 
     return true;
 }
+
+function validate_number_of_symbols(string $field_input, array &$field, array $params): bool
+{
+    if (strlen($field_input) > $params['max']) {
+        $field['error'] = strtr('Write up to @max symbols', [
+            '@max' => $params['max']
+        ]);
+        return false;
+    }
+
+    return true;
+}
+
+function validate_no_numbers(string $field_input, array &$field): bool
+{
+    $field_values_array = str_split($field_input);
+
+    foreach ($field_values_array as $value) {
+        if (strtolower($value) === strtoupper($value)) {
+            $field['error'] = 'You cannot use numbers';
+
+            return false;
+        }
+    }
+
+    return true;
+}

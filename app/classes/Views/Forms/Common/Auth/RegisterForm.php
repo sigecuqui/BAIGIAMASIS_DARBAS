@@ -29,6 +29,10 @@ class RegisterForm extends Form
                     'type' => 'text',
                     'validators' => [
                         'validate_field_not_empty',
+                        'validate_number_of_symbols' => [
+                            'max' => 40
+                        ],
+                        'validate_no_numbers'
                     ],
                     'extra' => [
                         'attr' => [
@@ -41,6 +45,10 @@ class RegisterForm extends Form
                     'type' => 'text',
                     'validators' => [
                         'validate_field_not_empty',
+                        'validate_number_of_symbols' => [
+                            'max' => 40
+                        ],
+                        'validate_no_numbers'
                     ],
                     'extra' => [
                         'attr' => [
@@ -51,9 +59,6 @@ class RegisterForm extends Form
                 'phone' => [
                     'label' => 'Phone number',
                     'type' => 'numbers',
-                    'validators' => [
-                        'validate_field_not_empty',
-                    ],
                     'extra' => [
                         'attr' => [
                             'placeholder' => 'Enter your phone number',
@@ -63,9 +68,6 @@ class RegisterForm extends Form
                 'address' => [
                     'label' => 'Address',
                     'type' => 'numbers',
-                    'validators' => [
-                        'validate_field_not_empty',
-                    ],
                     'extra' => [
                         'attr' => [
                             'placeholder' => 'Enter your home address',
